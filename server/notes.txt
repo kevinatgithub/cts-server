@@ -1,0 +1,13 @@
+#creating admin  user in mongo
+use admin
+db.createUser({
+    user : "root",
+    pwd : "d0hn88n37s",
+    roles : [
+        {
+            role : "userAdminAnyDatabase",
+            db : "admin"
+        },
+        "readWriteAnyDatabase"
+    ]
+})
