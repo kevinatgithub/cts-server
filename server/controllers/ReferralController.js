@@ -1,37 +1,37 @@
-const User = require("../models/User")
+const Referral = require("../models/Referral")
 
-class UsersController{
+class ReferralController{
 
     async get(req, res){
         const query = {}
         if(req.query.id){
             query._id = req.query.id
         }
-        let users = await User.find(query)
-        res.json(users)
+        let referrals = await Referral.find(query)
+        res.json(referrals)
     }
 
     post(req,res){
-        const user = new User(req.body)
-        user.save()
-        return res.status(201).json(user)
+        const referral = new Referral(req.body)
+        referral.save()
+        return res.status(201).json(referral)
     }
 
     async middleware(req,res,next){
         const {id} = req.params
-        req.user = await User.findById(id)
-        if(!req.user){
+        req.referral = await Referral.findById(id)
+        if(!req.referral){
             return res.status(404).send("Not Found")
         }
         next()
     }
 
     fetch(req,res){
-        return res.status(200).json(req.user)
+        return res.status(200).json(req.referral)
     }
 
     put(req,res){
-        const {user} = req
+        const {referral} = req
         const {name,info:{tags,color}} = req.body
         user.name = name
         user.info.tags = tags
@@ -58,4 +58,4 @@ class UsersController{
     }
 }
 
-module.exports = new UsersController
+module.exports = new ReferralController

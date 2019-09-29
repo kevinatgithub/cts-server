@@ -24,7 +24,8 @@ const db = mongooes.connect(con, {
     pass : DB_PASS,
     auth: {
         authdb: DB_AUTHDB
-    }
+    },
+    useUnifiedTopology: true
 })
 
 
@@ -35,6 +36,10 @@ app.use(bodyParser.json());
 
 const userRoutes = require("./routes/userRoutes");
 app.use('/users', userRoutes);
+const referenceRoutes = require("./routes/referenceRoutes");
+app.use('/refs',referenceRoutes);
+const seederRoutes = require("./routes/seederRoutes");
+app.use('/seed',seederRoutes);
 
 app.listen(port, () => {
     console.log(`listening on ${port}`);
