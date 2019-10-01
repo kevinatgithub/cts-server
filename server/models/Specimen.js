@@ -1,8 +1,5 @@
 const mongoose = require("mongoose");
 
-const {Schema} = mongoose
+const {Specimen} = require("./SharedSchemas")
 
-module.exports = mongoose.model("Specimen",new Schema({
-    _id : Number,
-    name : String
-}))
+module.exports = mongoose.model("Specimen",Specimen)

@@ -4,6 +4,7 @@ const DonationSeeder = require('../seeders/DonationSeeder')
 const ReferenceSeeder = require('../seeders/ReferenceSeeder')
 const OptionsRegistrySeeder = require('../seeders/OptionsRegistrySeeder')
 const TestProtocolSeeder = require('../seeders/TestProtocolSeeder')
+const UserSeeder = require('../seeders/UserSeeder')
 
 router.route("/all").get((req,res) => {
     DonationSeeder.run()
@@ -59,6 +60,10 @@ router.route("/references").get((req,res) => {
     res.send("ok")
 })
 
+router.route("/users").get((req,res) => {
+    UserSeeder.run()
+    res.send("ok")
+})
 
 
 module.exports = router

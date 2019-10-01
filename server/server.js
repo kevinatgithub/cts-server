@@ -1,5 +1,6 @@
 const port = process.env.PORT || 3000;
 const express = require('express');
+const cors = require('cors');
 const mongooes = require('mongoose');
 const bodyParser = require('body-parser');
 
@@ -34,10 +35,16 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
+app.use(cors());
+
+const referenceRoutes = require("./routes/referenceRoutes");
+app.use('/',referenceRoutes);
 const userRoutes = require("./routes/userRoutes");
 app.use('/users', userRoutes);
-const referenceRoutes = require("./routes/referenceRoutes");
-app.use('/refs',referenceRoutes);
+const donationRoutes = require("./routes/donationRoutes");
+app.use('/donations', donationRoutes);
+const referralRoutes = require("./routes/referralRoutes");
+app.use('/referrals',referralRoutes);
 const seederRoutes = require("./routes/seederRoutes");
 app.use('/seed',seederRoutes);
 

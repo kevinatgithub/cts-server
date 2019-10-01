@@ -49,13 +49,13 @@ router.route("/eia_results/:id")
 
 /* #region  Geenius Hiv Interpretations */
 const GeeniusHivInterpretationController = require("../controllers/GeeniusHivInterpretationController")
-router.route("/geenius")
+router.route("/geenius_hiv_interpretations")
     .get(GeeniusHivInterpretationController.get)
     .post(GeeniusHivInterpretationController.post)
 
-router.use("/geenius/:id", GeeniusHivInterpretationController.middleware)
+router.use("/geenius_hiv_interpretations/:id", GeeniusHivInterpretationController.middleware)
 
-router.route("/geenius/:id")
+router.route("/geenius_hiv_interpretations/:id")
     .get(GeeniusHivInterpretationController.fetch)
     .put(GeeniusHivInterpretationController.put)
     .patch(GeeniusHivInterpretationController.patch)
@@ -90,6 +90,9 @@ router.route("/options_registry/:id")
     .put(OptionsRegistryController.put)
     .patch(OptionsRegistryController.patch)
     .delete(OptionsRegistryController.remove)
+
+router.route("/options_registry/categories")
+    .get(OptionsRegistryController.categories)
 /* #endregion */
 
 /* #region  Machines */
@@ -195,6 +198,21 @@ router.route("/result_options/:id")
     .put(ResultOptionsController.put)
     .patch(ResultOptionsController.patch)
     .delete(ResultOptionsController.remove)
+/* #endregion */
+
+/* #region  Serodia Hiv Interpretation */
+const SerodiaHivInterpretationController = require("../controllers/SerodiaHivInterpretationController")
+router.route("/serodia_hiv_interpretations")
+.get(SerodiaHivInterpretationController.get)
+    .post(SerodiaHivInterpretationController.post)
+    
+    router.use("/serodia_hiv_interpretations/:id", SerodiaHivInterpretationController.middleware)
+    
+    router.route("/serodia_hiv_interpretations/:id")
+    .get(SerodiaHivInterpretationController.fetch)
+    .put(SerodiaHivInterpretationController.put)
+    .patch(SerodiaHivInterpretationController.patch)
+    .delete(SerodiaHivInterpretationController.remove)
 /* #endregion */
 
 /* #region  Specimens */

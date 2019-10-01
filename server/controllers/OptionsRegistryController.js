@@ -55,6 +55,11 @@ class OptionsRegistryController{
         req.record.delete()
         return res.status(200).send({ok:1})
     }
+
+    categories(req,res){
+        let categories = OptionsRegistry.find().select({category:1,_id:0})
+        res.status(200).json(categories)
+    }
 }
 
 module.exports = new OptionsRegistryController

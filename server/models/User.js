@@ -1,11 +1,5 @@
 const mongoose = require("mongoose");
 
-const {Schema} = mongoose
+const {User} = require("./SharedSchemas")
 
-module.exports = mongoose.model("User",new Schema({
-    _id : String,
-    password: String,
-    ulevel: Number,
-    name: String,
-    position: String
-}))
+module.exports = mongoose.model("User",User)

@@ -56,6 +56,17 @@ class UsersController{
         req.user.delete()
         return res.status(200).send({ok:1})
     }
+
+    async login(req,res){
+        let credentials = {
+            _id : req.body.user_id,
+            password : req.body.password
+        }
+        let user = await User.findOne(credentials).select({
+            password : 0
+        })
+        res.status(200).json({user})
+    }
 }
 
 module.exports = new UsersController

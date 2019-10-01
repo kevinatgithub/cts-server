@@ -2,36 +2,61 @@ const mongoose = require("mongoose");
 
 const {Schema} = mongoose
 
-const Courier = require("./Courier")
-const Cryobox = require("./Cryobox")
-const Donation = require("./Donation")
-const User = require("./User")
-const Specimen = require("./Specimen")
+const {Courier,Cryobox,Donation,User,Specimen} = require("./SharedSchemas")
 
 module.exports = mongoose.model("Referral",new Schema({
-    confirmatory_reference_number : String,
+    confirmatory_reference_number : {
+        type : String,
+        required : true,
+        unique : true
+    },
     contested : Boolean,
     courierMode : {
         type : String,
-        required : true
+        default : "courier"
     },
     donation_id : {
         type : String,
-        required : true   
+        required : true,
+        unique : true
     },
     shipped_dt : {
         type : Date,
+        default : Date.now()
+    },
+    courier : {
+        type : {
+            courier : Courier,
+        },
         required : true
     },
-    courier : Courier,
-    cryobox : Cryobox,
-    donation : Donation,
+    cryobox : {
+        type : Cryobox,
+        default : null
+    },
+    donation : {
+        type : Donation,
+        required : true
+    },
     received_by : User,
-    specimen : Specimen,
+    received_dt : {
+        type : Date,
+        default : null
+    },
+    specimen : {
+        type : Specimen,
+        required : true
+    },
     results : {
         bsf : {
-            bsf_mt: String,
-            proficiency_license: String,
+            bsf_mt: {
+                type : String,
+                required : true
+            },
+            proficiency_license: {
+                type : String,
+                required : true
+            },
             kits : [
                 new Schema({
                     lot_no : String,

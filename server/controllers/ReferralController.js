@@ -1,3 +1,4 @@
+const _ = require("lodash")
 const Referral = require("../models/Referral")
 
 class ReferralController{
@@ -13,13 +14,17 @@ class ReferralController{
 
     post(req,res){
         const referral = new Referral(req.body)
-        referral.save()
-        return res.status(201).json(referral)
+        referral.save((err,ref) => {
+            if(err){
+                return res.status(400).json(err)
+            }
+            return res.status(201).json(referral)
+        })
     }
 
     async middleware(req,res,next){
         const {id} = req.params
-        req.referral = await Referral.findById(id)
+        req.referral = await Referral.findOne({confirmatory_reference_number : id})
         if(!req.referral){
             return res.status(404).send("Not Found")
         }
@@ -32,29 +37,35 @@ class ReferralController{
 
     put(req,res){
         const {referral} = req
-        const {name,info:{tags,color}} = req.body
-        user.name = name
-        user.info.tags = tags
-        user.info.color = color
-        user.save()
-        return res.status(200).json(user)
-    }
-
-    patch(req,res){
-        const {user} = req
         if(req.body._id){
             delete req.body._id
         }
-        Object.entries(req.body).forEach(i => {
-            user[i[0]] = i[1]
-        })
-        user.save()
-        return res.status(200).json(user)
+        _.extend(referral,req.body)
+        referral.save()
+        return res.status(200).json(referral)
     }
 
     remove(req,res){
-        req.user.delete()
+        req.referral.delete()
         return res.status(200).send({ok:1})
+    }
+
+    async unstoredReferrals(req,res){
+        // r.cryobox == undefined && ((r.received_dt != null || r.received_dt != undefined) && r.reject_reason == undefined
+        let referrals = await Referral.find({
+            cryobox : {
+                $exists : true,
+                $eq : null
+            },
+            reject_reason : {
+                $exists : false
+            },
+            received_dt : {
+                $exists : true,
+                $eq : null
+            }
+        })
+        return res.status(200).json(referrals)
     }
 }
 

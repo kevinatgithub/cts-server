@@ -8,7 +8,7 @@ const field = new Schema({
     source: String
 })
 
-module.exports = mongoose.model("Test_Protocol",new Schema({
+module.exports = mongoose.model("test_protocol",new Schema({
     tti : String,
     name : String,
     fields : [
