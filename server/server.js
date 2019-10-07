@@ -1,4 +1,5 @@
 const port = process.env.PORT || 3000;
+
 const express = require('express');
 const cors = require('cors');
 const mongooes = require('mongoose');
@@ -36,6 +37,36 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 app.use(cors());
+
+var swaggerUi = require('swagger-ui-express'),
+    swaggerJSDoc = require('swagger-jsdoc');
+
+const swaggerOptions = {
+    swaggerDefinition : {
+        "swagger": "2.0",
+        "info": {
+            "version": "1.0.0",
+            "title": "NBBNETS - CTS API",
+            "description": "API for NBBNETS - Confirmatory Testing System",
+            "license": {
+            "name": "DOH",
+            "url": "https://opensource.org/licenses/MIT"
+            }
+        },
+        "host": "10.100.100.12:3000",
+        "schemes": [
+            "http"
+        ],
+        "consumes": [
+            "application/json"
+        ]
+    },
+    apis : ['./routes/*Routes.js']
+}
+
+const swaggerSpec = swaggerJSDoc(swaggerOptions);
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, false, {docExpansion : "none"}));
 
 const referenceRoutes = require("./routes/referenceRoutes");
 app.use('/',referenceRoutes);

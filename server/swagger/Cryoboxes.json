@@ -1,0 +1,75 @@
+{
+    "paths" : {
+        "/cryoboxes" : {
+            "get": {
+                "summary": "Get all cryoboxes in system",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "post" : {
+                "summary" : "Create new cryobox record",
+                "responses":{
+                    "200" :{
+                        "description":"OK"
+                    }
+                },
+                "parameters" : [
+                    {
+                        "name" : "Cryobox", "in" : "body"
+                    }
+                ]
+            }
+        },
+        "/cryoboxes/{id}" : {
+            "get" : {
+                "summary" : "Get cryobox details",
+                "responses" : {
+                    "200" :{
+                        "description" : "OK"
+                    }
+                },
+                "parameters" : [
+                    {"name" : "id" , "in" : "path", "required" : true}
+                ]
+            },
+            "put" : {
+                "responses" : {
+                    "200" :{
+                        "description" : "OK"
+                    }
+                },
+                "summary" : "Update cryobox details",
+                "parameters" : [
+                    {"name" : "id", "in" : "path", "required" : true},
+                    {"name" : "Cryobox", "in" : "body"}
+                ]
+            },
+            "patch" : {
+                "responses" : {
+                    "200" :{
+                        "description" : "OK"
+                    }
+                },
+                "summary" : "Update cryobox details",
+                "parameters" : [
+                    {"name" : "id", "in" : "path", "required" : true},
+                    {"name" : "Cryobox", "in" : "body"}
+                ]
+            },
+            "delete" : {
+                "responses" : {
+                    "200" :{
+                        "description" : "OK"
+                    }
+                },
+                "summary" : "Delete cryobox details",
+                "parameters" : [
+                    {"name" : "id", "in" : "path", "required" : true}
+                ]
+            }
+        }
+    }
+}

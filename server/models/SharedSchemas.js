@@ -37,7 +37,9 @@ module.exports = {
         },
         blood_type: String,
         donation_dt: String,
-        reactiveResults: Array,
+        reactiveResults: [{
+            type : String, require : true
+        }],
         facility: facility,
         donor: {
             initials: String,

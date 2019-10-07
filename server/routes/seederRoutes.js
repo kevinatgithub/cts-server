@@ -6,6 +6,52 @@ const OptionsRegistrySeeder = require('../seeders/OptionsRegistrySeeder')
 const TestProtocolSeeder = require('../seeders/TestProtocolSeeder')
 const UserSeeder = require('../seeders/UserSeeder')
 
+/**
+ * @swagger
+ * /seed/all:
+ *  get:
+ *      tags : [seeders]
+ *      description : run all seeders
+ *      responses : 
+ *          200:
+ *              description : ok
+ * /seed/donations:
+ *  get:
+ *      tags : [seeders]
+ *      description : run seeders for donation
+ *      responses : 
+ *              200:
+ *                  description : ok
+ * /seed/options:
+ *  get:
+ *     tags : [seeders]
+ *     description : run seeders for options registry
+ *     responses : 
+ *              200:
+ *                  description : ok
+ * /seed/test:
+ *  get:
+ *      tags : [seeders]
+ *      description : run seeders for test protocols
+ *      responses : 
+ *          200 : 
+ *              description : ok
+ * 
+ * /seed/references:
+ *  get:
+ *      tags : [seeders]
+ *      description : run seeders for all references
+ *      responses: 
+ *          200:
+ *              description: ok
+ * /seed/users:
+ *  /get:
+ *      tags : [seeders]
+ *      description : run seeders for user accounts
+ *      responses:
+ *          200:
+ *              description: ok
+ */
 router.route("/all").get((req,res) => {
     DonationSeeder.run()
     OptionsRegistrySeeder.run()
